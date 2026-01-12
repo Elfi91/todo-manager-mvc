@@ -11,4 +11,11 @@ class Task:
 
     def __str__(self) -> str:
         status = "✅" if self.completed else "❌"
-        return f"[{status}] ID: {self.id} | Titolo: {self.title}"
+        return f"{status} {self.title}"
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "completed": self.completed
+        }

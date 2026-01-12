@@ -1,0 +1,55 @@
+[
+    {
+        "id": "0598f9df-0b4c-4973-b1c3-5043ce692eea",
+        "name": "Spesa",
+        "task_list": [
+            {
+                "id": "55e75b64-844c-4add-a736-95f35f5eb4ca",
+                "title": "Uova",
+                "completed": false
+            },
+            {
+                "id": "3e090133-b40c-40fb-9ac7-ce2d1ee7a5cc",
+                "title": "Pane",
+                "completed": true
+            },
+            {
+                "id": "bc96a9ca-4914-4c5e-a623-4cb8d60e4917",
+                "title": "Acqua",
+                "completed": false
+            }
+        ]
+    },
+    {
+        "id": "26a1ae37-86da-4d82-bbf3-d8fc85a35051",
+        "name": "Bucato",
+        "task_list": [
+            {
+                "id": "708eb9cd-44b7-43f2-9b69-e15c18a9eef1",
+                "title": "Bianchi",
+                "completed": false
+            },
+            {
+                "id": "fc341924-f969-4060-888d-a955b30ad927",
+                "title": "Scuri",
+                "completed": false
+            },
+            {
+                "id": "8793693c-a33c-4597-bbaa-bf4ed66abd46",
+                "title": "Delicati",
+                "completed": false
+            }
+        ]
+    },
+    {
+        "id": "e511773d-3086-4a65-ba1e-52a5feef9b0a",
+        "name": "Chiamate",
+        "task_list": [
+            {
+                "id": "b8a652ee-8220-4d11-adf1-5792c74ba5ee",
+                "title": "Dottore",
+                "completed": false
+            }
+        ]
+    }
+]
