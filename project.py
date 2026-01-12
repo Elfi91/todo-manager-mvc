@@ -15,6 +15,8 @@ class Project:
 
     def get_project_name(self) -> str:
         return self.name
+    
+   
 
     def set_project_name(self, new_name:str) -> None:
         self.name = new_name
