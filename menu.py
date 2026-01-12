@@ -1,16 +1,17 @@
 class Menu:
-    def printMenu(self) -> None:
+    @staticmethod
+    def display():
         print(f"""
-        {"="*30}
-            LIST MANAGER
-        {"="*30}
-        1. Add Project
-        2. Add Task
-        3. Add Tag
-        4. List Projects
-        5. List Tasks
-        6. List Tags
-        7. Edit Project Name
-        8. Exit
-        {"="*30}
-    """)
+        {"="*35}
+                TODO MANAGER
+        {"="*35}
+        1. Aggiungi Progetto
+        2. Aggiungi Task a Progetto
+        3. [Tag - Non implementato]
+        4. Elenca Progetti
+        5. Elenca Task di un Progetto
+        6. [Tag - Non implementato]
+        7. Modifica Nome Progetto
+        8. Esci
+        {"="*35}
+        """)

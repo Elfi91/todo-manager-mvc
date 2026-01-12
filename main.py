@@ -1,102 +1,27 @@
-"""
-- menu
-- todolist
-- project
-- task
-- tag
-"""
-
-from menu import Menu
-from project import Project
 from todolist import Todolist
-
+from menu import Menu
+from controller import TodoController
 
 def main():
-    todolist = Todolist()
-
+    todo = Todolist()
+    ctrl = TodoController(todo)
     menu = Menu()
 
-    while True: 
+    while True:
+        menu.display()
+        choice = input("Seleziona l'operazione da eseguire: ")
 
-        menu.printMenu()
-
-        i = input("Seleziona l'operazione da eseguire: ")
-
-        match i:
-            case "1": 
-                print("="*30)
-                print("  --- Aggiungi progetto ---")
-                print("="*30)
-                project_name = input("Inserisci nome del progetto: ")
-                if todolist.is_project_name_already_existing(project_name):
-                    print(f"Un oggetto con il nome {project_name} esiste già")
-                    continue
-                
-                new_project = Project(project_name)
-                todolist.add_project(new_project)
-                print(f"Il numero di progetti è: {todolist.get_projects_lenght()}")
-                continue
-
-            case "2":
-                print("="*30)
-                print("  --- Aggiungi task ---")
-                print("="*30)
-                continue
-
-            case "3": 
-                print("="*30)
-                print("  --- Aggiungi tag ---")
-                print("="*30)
-                continue
-
-            case "4": 
-                print("="*30)
-                print("  --- Lista Progetti ---")
-                print("="*30)
-                print(todolist.get_projects())
-
-            case "5":
-                print("="*30)
-                print("  --- Lista le tasks ---")
-                print("="*30)
-                continue
-            
-            case "6":
-                print("="*30)
-                print("  --- Lista i tags ---")
-                print("="*30)
-                continue
-
-            case "7":
-                print("="*30)
-                print("--- Modifica nome progetto ---")
-                print("="*30)
-                print(todolist.get_projects())
-
-                id_progetto = input("Inserisci l'id del progetto da aggiornare: ")
-
-                while True:
-
-                    new_name = input("Inserisci il nuovo nome del progetto: ")
-
-                    if todolist.is_project_name_already_existing(new_name):
-                        print(f"Un oggetto con il nome {new_name} esiste già")
-                        continue
-
-                    todolist.update_project_name(id_progetto, new_name)
-                    print(f"Update eseguito con successo per l'oggetto {id_progetto}")
-                    break
-                continue
-
-            case "8":
-                print("="*30)
-                print("  --- Arrivederci ---")
-                print("="*30)
+        match choice:
+            case "1": ctrl.handle_add_project()
+            case "2": ctrl.handle_add_task()
+            case "4": ctrl.handle_list_projects()
+            case "5": ctrl.handle_list_tasks()
+            case "7": ctrl.handle_edit_project()
+            case "8": 
+                print("\nChiusura del programma... Arrivederci!")
                 break
-
             case _: 
-                print("Inserisci un numero da 1 a 8")
-                continue
+                print("\nScelta non valida. Inserisci un numero da 1 a 8.")
 
 if __name__ == "__main__":
     main()

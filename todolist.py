@@ -1,6 +1,5 @@
 from project import Project
 
-
 class Todolist:
     def __init__(self):
         self.projects: list[Project] = []
@@ -8,30 +7,26 @@ class Todolist:
     def add_project(self, project: Project) -> None:
         self.projects.append(project)
     
-    def get_projects_lenght(self) -> int:
+    def get_projects_str(self) -> str:
+        if not self.projects:
+            return "Nessun progetto presente."
+        return "\n".join([str(p) for p in self.projects])
+
+    def get_projects_length(self) -> int:
         return len(self.projects)
 
-    def get_projects(self) -> list[Project]:
-        if not self.projects:
-            return "Lista vuota."
-    
-        risultato = "" # Inizializza la stringa
-        for p in self.projects:
-            risultato += f"{p.id} - {p.name}\n"
-        return risultato
+    def find_project_by_id(self, project_id: str) -> Project:
+        return next((p for p in self.projects if p.get_project_id() == project_id), None)
 
-    def is_project_name_already_existing(self, new_name: str) -> bool:
+    def is_name_duplicate(self, name: str) -> bool:
         for p in self.projects:
-            if p.get_project_name() == new_name.strip():
+            if p.get_project_name().lower() == name.strip().lower():
                 return True
         return False
-        
-    def update_project_name(self, id: str, new_name: str) -> None:
-        project = next((project for project in self.projects if project.get_project_id() == id), None)
-        
+
+    def update_project_name(self, project_id: str, new_name: str) -> bool:
+        project = self.find_project_by_id(project_id)
         if project:
             project.set_project_name(new_name)
-        else:
-            print(f"errore: Nessun progetto trovato con l'ID {id}")
-        
-
+            return True
+        return False
