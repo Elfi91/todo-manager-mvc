@@ -49,10 +49,11 @@ Il progetto segue il pattern architetturale **MVC**:
 
 1. Clona la cartella del progetto.
 2. Apri il terminale nella cartella del progetto
-3. Avvia l'applicazione:
+3. Avvia l'applicazione
 ## ⚠️ Note sull'utilizzo
 - **Salvataggio automatico:** Ogni modifica viene salvata istantaneamente nel file `data.json`.
 - **Input pulito:** Il sistema gestisce automaticamente gli spazi bianchi accidentali negli input.
 - **Chiusura sicura:** Puoi chiudere il programma tramite il comando 9 o premendo `Ctrl+C`; il sistema gestirà l'interruzione senza mostrare errori di sistema.
 
-
+## 📜 Licenza
+Questo progetto è distribuito sotto la licenza MIT. Consulta il file [LICENSE](LICENSE) per ulteriori dettagli
