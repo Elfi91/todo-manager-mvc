@@ -2,6 +2,7 @@ from todolist import Todolist
 from menu import Menu
 from controller import TodoController
 
+
 def main():
     todo = Todolist()
     todo.load_from_json()
@@ -28,7 +29,10 @@ def main():
             case "7":
                 ctrl.handle_complete_task()
             case "8": 
-                ctrl.handle_delete_task()        
+                ctrl.handle_delete_task()   
+
+            # TODO: implements the missing tags feature    
+             
             case "9":
                 todo.save_to_json()
                 print("\nArrivederci!")
