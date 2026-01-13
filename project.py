@@ -26,7 +26,7 @@ class Project:
 
     def get_tasks_str(self) -> str:
         if not self.task_list:
-            return "Nessuna task presente in questo progetto."
+            return "No tasks in this project."
         return "\n".join([str(t) for t in self.task_list])
     
     def remove_task(self, task) -> None:
@@ -36,7 +36,7 @@ class Project:
     def __str__(self) -> str:
         num_tasks = len(self.task_list)
         plural = "task" if num_tasks == 1 else "tasks"
-        return f"Nome: {self.name} ({num_tasks} {plural})"
+        return f"Name: {self.name} ({num_tasks} {plural})"
     
     def to_dict(self):
         return {

@@ -8,128 +8,128 @@ class TodoController:
 
     def handle_add_project(self):
         print("\n" + "="*40)
-        print("  ➕  NUOVO PROGETTO")
+        print("  ➕  NEW PROJECT")
         print("="*40)
-        name = input("Nome del progetto: ").strip()
+        name = input("Project name: ").strip()
         if not name:
-            print("❌ Errore: Il nome non può essere vuoto.")
+            print("❌ Error: The name cannot be empty.")
             return
         if self.todo.is_name_duplicate(name):
-            print(f"❌ Errore: Il progetto '{name}' esiste già.")
+            print(f"❌ Error: Project '{name}' already exists.")
         else:
             self.todo.add_project(Project(name))
             self.todo.save_to_json()
-            print(f"✅ Progetto '{name}' creato con successo.")
+            print(f"✅ Project '{name}' created successfully.")
 
     def handle_add_task(self):
         print("\n" + "="*40)
-        print("  📝  NUOVA TASK")
+        print("  📝  NEW TASK")
         print("="*40)
-        project = self._seleziona_progetto()
+        project = self._select_project()
         if project:
-            print(f"\n📍 Progetto selezionato: {project.get_project_name()}")
-            title = input("Titolo della task: ").strip()
+            print(f"\n📍 Selected project: {project.get_project_name()}")
+            title = input("Task title: ").strip()
             if not title:
-                print("❌ Errore: Il titolo non può essere vuoto.")
+                print("❌ Error: The title cannot be empty.")
                 return
             if project.is_task_already_existing(title):
-                print("❌ Errore: Task già presente nel progetto.")
+                print("❌ Error: Task already exists in the project.")
             else:
                 project.add_task(Task(title))
                 self.todo.save_to_json()
-                print("✅ Task aggiunta con successo!")
+                print("✅ Task added successfully!")
 
     def handle_list_projects(self):
         print("\n" + "="*40)
-        print("  📂  LISTA PROGETTI")
+        print("  📂  PROJECT LIST")
         print("="*40)
         print(self.todo.get_projects_str())
 
     def handle_list_tasks(self):
-        project = self._seleziona_progetto()
+        project = self._select_project()
         if project:
-            print(f"\n📋 Task del progetto '{project.get_project_name()}':")
+            print(f"\n📋 Tasks for project '{project.get_project_name()}':")
             print(project.get_tasks_str())
 
     def handle_edit_project(self):
-        project = self._seleziona_progetto()
+        project = self._select_project()
         if project:
-            new_n = input(f"Nuovo nome per '{project.get_project_name()}' (o 'annulla'): ").strip()
-            if new_n and new_n.lower() != 'annulla':
+            new_n = input(f"New name for '{project.get_project_name()}' (or 'cancel'): ").strip()
+            if new_n and new_n.lower() != 'cancel':
                 if self.todo.update_project_name(project, new_n):
                     self.todo.save_to_json()
-                    print("✅ Nome aggiornato con successo.")
+                    print("✅ Name updated successfully.")
                 else:
-                    print("❌ Errore: Un progetto con questo nome esiste già.")
+                    print("❌ Error: A project with this name already exists.")
 
     def handle_delete_project(self):
         print("\n" + "="*40)
-        print("  🗑️   ELIMINA PROGETTO")
+        print("  🗑️   DELETE PROJECT")
         print("="*40)
-        project = self._seleziona_progetto()
+        project = self._select_project()
         if project:
-            conferma = input(f"❗ Sei sicuro di voler eliminare '{project.get_project_name()}' e tutte le sue task? (s/n): ").strip().lower()
-            if conferma == 's':
+            confirm = input(f"❗ Are you sure you want to delete '{project.get_project_name()}' and all its tasks? (y/n): ").strip().lower()
+            if confirm == 'y':
                 self.todo.remove_project(project)
                 self.todo.save_to_json()
-                print("✅ Progetto eliminato.")
+                print("✅ Project deleted.")
             else:
-                print("🚫 Operazione annullata.")
+                print("🚫 Operation cancelled.")
 
     def handle_delete_task(self):
         print("\n" + "="*40)
-        print("  ❌  ELIMINA TASK")
+        print("  ❌  DELETE TASK")
         print("="*40)
-        project = self._seleziona_progetto()
+        project = self._select_project()
         if project:
             if not project.task_list:
-                print("ℹ️  Non ci sono task in questo progetto.")
+                print("ℹ️  No tasks in this project.")
                 return
             
             for i, task in enumerate(project.task_list, start=1):
                 print(f"{i}. {task}")
             
             try:
-                scelta = int(input("\nNumero task da eliminare (0 per annullare): "))
-                if scelta != 0 and 0 < scelta <= len(project.task_list):
-                    task_da_rimuovere = project.task_list[scelta-1]
-                    project.remove_task(task_da_rimuovere)
+                choice = int(input("\nNumber of task to delete (0 to cancel): "))
+                if choice != 0 and 0 < choice <= len(project.task_list):
+                    task_to_remove = project.task_list[choice-1]
+                    project.remove_task(task_to_remove)
                     self.todo.save_to_json()
-                    print("✅ Task rimossa con successo.")
+                    print("✅ Task removed successfully.")
                 else:
-                    print("🚫 Operazione annullata.")
+                    print("🚫 Operation cancelled.")
             except ValueError:
-                print("⚠️  Inserisci un numero valido.")
+                print("⚠️  Please enter a valid number.")
 
     def handle_complete_task(self):
-        project = self._seleziona_progetto()
+        project = self._select_project()
         if project:
-            tasks_da_fare = [t for t in project.task_list if not t.completed]
-            if not tasks_da_fare:
-                print("🎉 Tutte le task sono state completate!")
+            tasks_to_do = [t for t in project.task_list if not t.completed]
+            if not tasks_to_do:
+                print("🎉 All tasks have been completed!")
                 return
-            for i, task in enumerate(tasks_da_fare, start=1):
+            for i, task in enumerate(tasks_to_do, start=1):
                 print(f"{i}. {task}")
             try:
-                scelta = int(input("\nNumero task da completare (0 per annullare): "))
-                if scelta != 0 and 0 < scelta <= len(tasks_da_fare):
-                    tasks_da_fare[scelta-1].mark_as_completed()
+                choice = int(input("\nNumber of task to complete (0 to cancel): "))
+                if choice != 0 and 0 < choice <= len(tasks_to_do):
+                    tasks_to_do[choice-1].mark_as_completed()
                     self.todo.save_to_json()
-                    print("✅ Task completata con successo!")
+                    print("✅ Task completed successfully!")
             except ValueError:
-                print("⚠️  Inserisci un numero valido.")
+                print("⚠️  Please enter a valid number.")
 
-    def _seleziona_progetto(self):
-        progetti = self.todo.projects
-        if not progetti:
-            print("⚠️  Nessun progetto disponibile.")
+    def _select_project(self):
+        projects = self.todo.projects
+        if not projects:
+            print("⚠️  No projects available.")
             return None
-        for i, project in enumerate(progetti, start=1):
+        for i, project in enumerate(projects, start=1):
             print(f"{i}. {project.get_project_name()}")
         try:
-            scelta = int(input("\nScegli il numero (0 per annullare): "))
-            if 0 < scelta <= len(progetti):
-                return progetti[scelta-1]
+            choice = int(input("\nChoose the number (0 to cancel): "))
+            if 0 < choice <= len(projects):
+                return projects[choice-1]
         except ValueError:
             pass
         return None

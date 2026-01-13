@@ -12,7 +12,7 @@ class Todolist:
     
     def get_projects_str(self) -> str:
         if not self.projects:
-            return "Nessun progetto presente."
+            return "No projects available."
         return "\n".join([str(p) for p in self.projects])
 
     def get_projects_length(self) -> int:
@@ -45,7 +45,7 @@ class Todolist:
         data = [p.to_dict() for p in self.projects]
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
-        print("Dati salvati correttamente")
+        print("Data saved successfully")
 
     def load_from_json(self, filename="data.json"):
         if not os.path.exists(filename):
@@ -65,4 +65,4 @@ class Todolist:
                     project.add_task(task)
                 self.add_project(project)
         except Exception as e:
-            print(f"Errore nel caricamento: {e}")
+            print(f"Error loading data: {e}")

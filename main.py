@@ -11,7 +11,7 @@ def main():
 
     while True:
         menu.display()
-        choice = input("Seleziona l'operazione: ").strip()
+        choice = input("Select operation: ").strip()
 
         match choice:
             case "1": 
@@ -35,13 +35,13 @@ def main():
              
             case "9":
                 todo.save_to_json()
-                print("\nArrivederci!")
+                print("\nGoodbye!")
                 break
             case _:
-                print("\nScelta non valida (1-9)")
+                print("\nInvalid choice (1-9)")
 
 if __name__ == "__main__":
     try:
        main()
     except KeyboardInterrupt: 
-        print("\nProgramma interrotto manualmente Arrivederci")
+        print("\nProgram interrupted manually. Goodbye")

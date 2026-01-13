@@ -8,20 +8,20 @@ class Menu:
                 🚀 TODO LIST MANAGER
         {"="*40}
         
-        📁 PROGETTI
-          [1] Aggiungi Progetto
-          [2] Elenca Progetti
-          [3] Rinomina Progetto
-          [4] Rimuovi Progetto
+        📁 PROJECTS
+          [1] Add Project
+          [2] List Projects
+          [3] Rename Project
+          [4] Remove Project
 
         📝 TASKS
-          [5] Aggiungi Task
-          [6] Elenca Task
-          [7] Completa Task
-          [8] Rimuovi Task
+          [5] Add Task
+          [6] List Tasks
+          [7] Complete Task
+          [8] Remove Task
 
-        ⚙️  SISTEMA
-          [9] Esci e Salva
+        ⚙️  SYSTEM
+          [9] Exit and Save
         {"="*40}
         """
         print(textwrap.dedent(testo_menu).strip())
