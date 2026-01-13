@@ -24,5 +24,6 @@ class Menu:
           [9] Exit and Save
         {"="*40}
         """
-        # dedent removes common leading whitespace from every line in `menu_text`
+        # Functionality Explanation: textwrap.dedent handles the indentation of the multiline string.
+        # It removes the common leading whitespace from each line so the menu prints correctly aligned to the left.
         print(textwrap.dedent(menu_text).strip())

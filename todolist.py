@@ -29,12 +29,14 @@ class Todolist:
         new_name_lower = new_name_strip.lower()
 
         if new_name_lower == project.get_project_name().lower():
-            # If the name is effectively the same (just case change), allow update without duplicate check
+            # Functionality Explanation: If the new name only differs by case (e.g. "Work" -> "work"),
+            # we allow the update directly to preserve the user's preferred casing without checking for duplicates.
             project.set_project_name(new_name_strip)
             return True
         
         if not self.is_name_duplicate(new_name_strip):
-            # If the name is different, strictly check for duplicates before renaming
+            # Functionality Explanation: For a completely new name, we must first verify that no other project
+            # already uses this name to maintain uniqueness constraints.
             project.set_project_name(new_name_strip)
             return True
         return False
@@ -58,11 +60,11 @@ class Todolist:
                 
             self.projects = []
             for p_data in data:
-                # Reconstruct Project object
+                # Functionality Explanation: Reconstruct the Project object from the dictionary data.
                 project = Project(p_data["name"])
                 project.id = p_data["id"] 
                 for t_data in p_data["task_list"]:
-                    # Reconstruct Task object and link to Project
+                    # Functionality Explanation: Reconstruct each Task object and re-establish the relationship with its parent Project.
                     task = Task(t_data["title"])
                     task.id = t_data["id"]
                     task.completed = t_data["completed"]
