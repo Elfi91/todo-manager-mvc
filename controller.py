@@ -92,6 +92,7 @@ class TodoController:
             try:
                 choice = int(input("\nNumber of task to delete (0 to cancel): "))
                 if choice != 0 and 0 < choice <= len(project.task_list):
+                    # Convert 1-based user choice to 0-based list index
                     task_to_remove = project.task_list[choice-1]
                     project.remove_task(task_to_remove)
                     self.todo.save_to_json()

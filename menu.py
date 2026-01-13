@@ -3,7 +3,7 @@ import textwrap
 class Menu:
     @staticmethod
     def display():
-        testo_menu = f"""
+        menu_text = f"""
         {"="*40}
                 🚀 TODO LIST MANAGER
         {"="*40}
@@ -24,4 +24,5 @@ class Menu:
           [9] Exit and Save
         {"="*40}
         """
-        print(textwrap.dedent(testo_menu).strip())
+        # dedent removes common leading whitespace from every line in `menu_text`
+        print(textwrap.dedent(menu_text).strip())
